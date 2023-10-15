@@ -6,10 +6,7 @@ authors = [
 ]
 readme = "README.md"
 dynamic = ["version"]
-dependencies = [
-    "requests",
-    "colorama",
-]
+dependencies = ["requests"]
 
 [project.optional-dependencies]
 dev = [

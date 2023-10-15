@@ -13,16 +13,16 @@ install encant
 pipx install encant
 ```
 
-install a python version (or two)
+add a python version (or two)
 
 ```bash
-$ encant 3.10
+$ encant add 3.10
 major.minor only version detected, pulling latest: 3.10.13
-3.10.13 written to /Users/aaron/.snakes/3.10.13
+Successfully added 3.10.13 to ~/.snakes/3.10.13
 ```
 
 That's it! You can now use python however you need to, e.g.:
 
 ```bash
-$HOME/.snakes/3.10.13/bin/python3 -m venv .venv
+~/.snakes/3.10.13/bin/python3 -m venv .venv
 ```
