@@ -14,7 +14,7 @@ sysname = sysname.lower()
 machine = "aarch64" if machine == "arm64" else machine
 
 
-def get(version: str) -> str:
+def _get(version: str) -> str:
     r = requests.get(RELEASE_URL)
     r.raise_for_status()
     for row in r.json():
@@ -28,7 +28,7 @@ def get(version: str) -> str:
     )
 
 
-def extract(obj: bytes, version: str, path: str | os.PathLike) -> None:
+def _extract(obj: bytes, version: str, path: str | os.PathLike) -> None:
     with tarfile.open(mode="r|*", fileobj=io.BytesIO(obj)) as tf:
         tf.extractall(path)
 
@@ -42,7 +42,7 @@ def extract(obj: bytes, version: str, path: str | os.PathLike) -> None:
 
 
 def add(version: str) -> None:
-    url = get(version)
+    url = _get(version)
     r = requests.get(url)
 
     if version.count(".") == 1:
@@ -51,7 +51,7 @@ def add(version: str) -> None:
         version = re.search(r"3\.[0-9]+\.[0-9]+", url)[0]
         print(f"major.minor only version detected, pulling latest: {version}")
 
-    extract(r.content, version, path=DEFAULT_OUTPUT_DIR)
+    _extract(r.content, version, path=DEFAULT_OUTPUT_DIR)
 
 
 def list() -> None:
