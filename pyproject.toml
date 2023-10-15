@@ -5,6 +5,7 @@ authors = [
     { name = "Aaron Glover", email = "aglove2189@gmail.com" }
 ]
 readme = "README.md"
+license = "MIT"
 dynamic = ["version"]
 dependencies = [
     "requests",
