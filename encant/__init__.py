@@ -74,15 +74,15 @@ def cli():
     subparsers.add_parser("list", help="list all python versions added")
     remove_parser = subparsers.add_parser("remove", help="remove a python version")
     for command in (add_parser, remove_parser):
-        command.add_argument("version", type=str, help="python version")
+        command.add_argument("version", type=str, nargs="+", help="python version")
 
     args = parser.parse_args()
     if args.command == "add":
-        add(args.version)
+        [add(version) for version in args.version]
     elif args.command == "list":
         list()
     elif args.command == "remove":
-        remove(args.version)
+        [remove(version) for version in args.version]
     elif args.command is None:
         parser.print_help()
     else:
