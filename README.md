@@ -7,19 +7,19 @@ Built in spite of [pyenv](https://github.com/pyenv/pyenv) and inspired by [rye](
 
 ## Usage
 
-1. install encant
+install encant
 
 ```bash
 pipx install encant
 ```
 
-1. install a python version (or two)
+install a python version (or two)
 
-    ```bash
-    $ encant 3.10
-    major.minor only version detected, pulling latest: 3.10.13
-    3.10.13 written to /Users/aaron/.snakes/3.10.13
-    ```
+```bash
+$ encant 3.10
+major.minor only version detected, pulling latest: 3.10.13
+3.10.13 written to /Users/aaron/.snakes/3.10.13
+```
 
 That's it! You can now use python however you need to, e.g.:
 
