@@ -5,13 +5,15 @@ import platform
 import re
 import shutil
 import tarfile
+from typing import Union
 
 import requests
 
 RELEASE_URL = "https://api.github.com/repos/indygreg/python-build-standalone/releases"
 DEFAULT_OUTPUT_DIR = os.path.join(os.path.expanduser("~"), ".snakes")
 sysname = platform.system().lower()
-machine = "aarch64" if platform.machine() == "arm64" else platform.machine()
+machine = platform.machine().lower()
+machine = {"arm64": "aarch64", "amd64": "x86_64"}.get(machine, machine)
 
 
 def get(version: str) -> str:
@@ -23,12 +25,12 @@ def get(version: str) -> str:
             if all([i in name for i in (sysname, machine, version, "install_only")]):
                 return asset["browser_download_url"]
     raise ValueError(
-        f"{version} not found. Either you have a typo or this version was never released by "
-        "indygreg: https://github.com/indygreg/python-build-standalone/releases"
+        f"{version} not found for {sysname}_{machine}. Either you have a typo or this version was "
+        "never released by indygreg: https://github.com/indygreg/python-build-standalone/releases."
     )
 
 
-def extract(obj: bytes, version: str, path: str | os.PathLike) -> None:
+def extract(obj: bytes, version: str, path: Union[str, os.PathLike]) -> None:
     with tarfile.open(mode="r|*", fileobj=io.BytesIO(obj)) as tf:
         tf.extractall(path)
 
