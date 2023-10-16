@@ -1,6 +1,7 @@
 import argparse
 import io
 import os
+import platform
 import re
 import shutil
 import tarfile
@@ -9,9 +10,8 @@ import requests
 
 RELEASE_URL = "https://api.github.com/repos/indygreg/python-build-standalone/releases"
 DEFAULT_OUTPUT_DIR = os.path.join(os.path.expanduser("~"), ".snakes")
-sysname, _, _, _, machine = os.uname()
-sysname = sysname.lower()
-machine = "aarch64" if machine == "arm64" else machine
+sysname = platform.system().lower()
+machine = "aarch64" if platform.machine() == "arm64" else platform.machine()
 
 
 def get(version: str) -> str:
