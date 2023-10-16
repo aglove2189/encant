@@ -13,6 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
+        target-version: ["py39", "py310", "py311"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -25,7 +26,7 @@ jobs:
         python -m pip install .[dev]
     - name: black
       run: |
-        black . --config pyproject.toml --check --target-version ${{ matrix.python-version }}
+        black . --config pyproject.toml --check --target-version ${{ matrix.target-version }}
     - name: ruff
       run: |
-        ruff . --target-version ${{ matrix.python-version }}
+        ruff . --target-version ${{ matrix.target-version }}
